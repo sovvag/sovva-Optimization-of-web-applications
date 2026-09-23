@@ -24,7 +24,7 @@
 |---|----------|--------|-----------|
 | 1 | Пользовательские запросы в веб-приложении | [ПР №1](ПР%1%Пользовательские%запросы%в%веб-приложении%(DevTools,%HTTP,%REST,%JSON,%Postman)%до%10.09.md) | Доделано |
 | 2 | Проект во время пары MVC | [MVC статьи](https://github.com/sovvag/sovva-Optimization-of-web-applications/tree/main/ПР/MVC)| Доделано |
-| 3 | MVC для ювелирки | [MVC ювелирка]()| не покажу, не готово) |
+| 3 | MVC для ювелирки | [MVC ювелирка](https://github.com/sovvag/sovva-Optimization-of-web-applications/tree/main/ПР/jewelir)| Доделано |
 
 ### Лабораторные работы (Лабы)
 | № | Название | Ссылка | Готовность |
