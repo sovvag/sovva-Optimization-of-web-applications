@@ -1,0 +1,18 @@
+2026-06-15 10:55:25 - Action: register
+Array
+(
+    [action] => register
+    [name] => Софья
+    [email] => galaevasof06@gmail.com
+    [phone] => +7 (985) 852-04-84
+    [password] => 123456
+)
+
+2026-06-15 11:02:12 - Action: login
+Array
+(
+    [action] => login
+    [email] => galaevasof06@gmail.com
+    [password] => 123456
+)
+
