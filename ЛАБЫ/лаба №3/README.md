@@ -24,4 +24,4 @@ $pass = '';
 
 ## Лабораторная работа
 
-Отчёт по лабораторной работе №3 (структура сайта и sitemap.xml): [ЛР №3.md](docs/LR3_sitemap.md)
+Отчёт по лабораторной работе №3 (структура сайта и sitemap.xml): [ЛР №3.md](https://github.com/sovvag/sovva-Optimization-of-web-applications/blob/main/ЛАБЫ/лаба%20№3/ЛР%20№3.md)
