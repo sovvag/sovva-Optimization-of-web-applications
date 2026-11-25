@@ -1,0 +1,4 @@
+<section id="booking-calendar" data-doctor="<?= (int)$doctor["id"] ?>" data-api="<?= e(url("/api/slots")) ?>" data-post="<?= e(url("/appointments")) ?>" data-mine="<?= e(url("/my-appointments")) ?>" data-csrf="<?= e(Csrf::token()) ?>">
+<h1>Запись на приём</h1><p class="muted"><?= e(full_name($doctor)) ?> · <?= e($doctor["specialty"]) ?></p>
+<div class="booking-layout"><section class="panel"><div class="calendar-top"><button id="cal-prev" type="button">‹</button><h2 id="cal-title">Загрузка…</h2><button id="cal-next" type="button">›</button></div><div class="calendar-weekdays"><span>Пн</span><span>Вт</span><span>Ср</span><span>Чт</span><span>Пт</span><span>Сб</span><span>Вс</span></div><div class="calendar-grid" id="cal-days"></div></section><aside class="panel"><h2 id="slot-title">Выберите дату</h2><div id="slot-buttons"></div><p id="cal-message" role="status"></p></aside></div></section>
+<script src="<?= asset("js/calendar.js") ?>" defer></script>
