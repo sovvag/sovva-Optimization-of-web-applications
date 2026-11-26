@@ -1,0 +1,249 @@
+/* ============================================================
+   app.css: интерфейс после входа (боковая панель, таблицы, формы,
+   окна, уведомления) и стеклянные иконки
+   ============================================================ */
+[hidden] { display: none !important; }
+
+/* ---------- Иконки в стиле матового стекла ---------- */
+.gi-box { display: block; width: 38px; height: 38px; position: relative; }
+.gi { position: absolute; left: 0; top: 0; width: 64px; height: 64px; transform: scale(.594); transform-origin: 0 0; }
+.gi b { position: absolute; box-sizing: border-box; display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 500; font-style: normal; }
+.gi .s { background: #1B4DFF; }
+.gi .g { background: rgba(160, 184, 255, .72); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); box-shadow: inset 0 0 0 .5px rgba(255, 255, 255, .6); }
+.gi .w { background: #fff; }
+
+/* ---------- Боковая панель ---------- */
+.rail {
+    position: fixed; z-index: 50; left: 12px; top: 12px; bottom: 12px; width: 68px;
+    border-radius: 26px; background: rgba(255, 255, 255, .7);
+    backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+    border: 1px solid rgba(255, 255, 255, .85); box-shadow: 0 8px 30px rgba(27, 77, 255, .14);
+    padding: 10px 8px; display: flex; flex-direction: column; gap: 6px; overflow: hidden;
+    transition: width .38s cubic-bezier(.22, 1, .36, 1);
+}
+.rail:hover, .rail:focus-within { width: 106px; }
+.rail-brand { display: flex; justify-content: center; padding: 8px 0 12px; color: var(--blue); }
+.rail-item {
+    display: flex; flex-direction: column; align-items: center; width: 100%;
+    padding: 8px 0; border-radius: 18px; cursor: pointer; color: var(--ink);
+    background: none; border: none; font: inherit; text-decoration: none; transition: background .2s;
+}
+.rail-item:hover { background: rgba(27, 77, 255, .08); text-decoration: none; }
+.rail-item.active { background: rgba(27, 77, 255, .13); }
+.rail-label {
+    font-size: 12px; font-weight: 500; max-height: 0; opacity: 0; overflow: hidden;
+    margin-top: 0; white-space: nowrap;
+    transition: max-height .3s .05s, opacity .25s .12s, margin .3s;
+}
+.rail:hover .rail-label, .rail:focus-within .rail-label { max-height: 16px; opacity: 1; margin-top: 4px; }
+.rail-space { flex: 1; }
+.rail-form { margin: 0; }
+
+/* Затемнение остальной страницы, пока панель раскрыта */
+.app-dim {
+    position: fixed; inset: 0; z-index: 40; background: rgba(8, 20, 60, .3);
+    opacity: 0; pointer-events: none; transition: opacity .38s;
+}
+.rail:hover ~ .app-dim, .rail:focus-within ~ .app-dim { opacity: 1; }
+
+.app-main { padding: 28px 28px 40px 108px; max-width: 1600px; }
+
+/* ---------- Общие элементы ---------- */
+.page-head-row { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; flex-wrap: wrap; margin-bottom: 18px; }
+.page-head-row h1 { margin: 0 0 2px; }
+.page-head-row p { margin: 0; }
+
+.btn-small { height: 32px; padding: 0 14px; font-size: 13px; }
+.btn-icon { width: 40px; padding: 0; font-size: 22px; }
+.btn-danger { color: var(--err); border-color: rgba(198, 40, 40, .3); }
+.btn-danger:hover { background: var(--err-bg); }
+.btn:disabled { opacity: .5; cursor: default; }
+
+.panel { background: #fff; border: 1px solid var(--line); border-radius: 20px; padding: 24px; }
+.empty { text-align: center; padding: 40px 24px; }
+
+.status { display: inline-block; font-size: 13px; padding: 4px 12px; border-radius: 12px; white-space: nowrap; }
+.status-pending { background: #FFF1CC; color: #8A5A00; }
+.status-confirmed { background: var(--ok-bg); color: var(--ok); }
+.status-completed { background: rgba(27, 77, 255, .1); color: var(--blue); }
+.status-rejected, .status-cancelled { background: var(--err-bg); color: var(--err); }
+
+/* Поля ввода */
+.search-bar input, .form-panel input, .date-nav input {
+    height: 42px; border: 1px solid var(--line); border-radius: 12px; padding: 0 14px;
+    font: inherit; background: #fff; color: var(--ink);
+}
+.search-bar input:focus, .form-panel input:focus, .date-nav input:focus { outline: 2px solid rgba(27, 77, 255, .35); border-color: var(--blue); }
+.search-bar { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
+.search-bar input { flex: 1; min-width: 220px; max-width: 420px; }
+
+/* Таблицы */
+.table-wrap { background: #fff; border: 1px solid var(--line); border-radius: 20px; overflow-x: auto; }
+.table { width: 100%; border-collapse: collapse; }
+.table th { text-align: left; font-size: 12px; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); font-weight: 500; padding: 14px 16px; }
+.table td { padding: 12px 16px; border-top: 1px solid var(--line); }
+.table tbody tr:hover { background: #F7F9FF; }
+.col-actions { text-align: right; white-space: nowrap; }
+.col-actions form, .col-actions .btn { display: inline-flex; margin-left: 6px; }
+
+/* Формы */
+.form-panel { max-width: 820px; }
+.form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+.form-grid label { display: flex; flex-direction: column; gap: 6px; font-size: 14px; color: var(--muted); }
+.form-panel input { width: 100%; }
+.form-full { grid-column: 1 / -1; }
+.form-error { color: var(--err); font-size: 12px; }
+.form-actions { display: flex; gap: 10px; margin-top: 22px; }
+
+/* ---------- Модальные окна ---------- */
+.modal { position: fixed; inset: 0; z-index: 100; display: flex; align-items: center; justify-content: center; padding: 16px; }
+.modal-backdrop { position: absolute; inset: 0; background: rgba(8, 20, 60, .45); }
+.modal-card {
+    position: relative; background: #fff; border-radius: 24px; padding: 22px 24px; width: 100%;
+    max-height: calc(100vh - 32px); overflow: auto; box-shadow: 0 30px 80px rgba(8, 20, 60, .3);
+}
+.modal-sm { max-width: 440px; }
+.modal-lg { max-width: 700px; }
+.modal-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+.modal-head h2 { margin: 0; font-size: 20px; }
+.modal-close { border: none; background: none; font-size: 28px; line-height: 1; color: var(--muted); cursor: pointer; }
+.modal-actions { display: flex; gap: 10px; margin-top: 18px; }
+.modal-actions form { margin: 0; }
+.modal-foot { display: flex; justify-content: space-between; align-items: center; gap: 12px; border-top: 1px solid var(--line); margin-top: 18px; padding-top: 14px; }
+body.modal-open { overflow: hidden; }
+.detail { display: grid; grid-template-columns: 120px 1fr; gap: 8px 12px; margin: 0; }
+.detail dt { color: var(--muted); font-size: 14px; }
+.detail dd { margin: 0; }
+.dm-ask { font-size: 17px; font-weight: 500; margin: 8px 0; }
+
+/* ---------- Всплывающие уведомления (справа внизу) ---------- */
+.toast-area { position: fixed; right: 20px; bottom: 20px; z-index: 90; display: flex; flex-direction: column; gap: 10px; width: 330px; max-width: calc(100vw - 40px); }
+.toast {
+    position: relative; background: rgba(255, 255, 255, .88);
+    backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+    border: 1px solid rgba(255, 255, 255, .9); border-left: 4px solid #F5B800;
+    box-shadow: 0 14px 40px rgba(27, 77, 255, .22); border-radius: 20px; padding: 14px 18px;
+    animation: toast-in .35s ease;
+}
+@keyframes toast-in { from { transform: translateY(16px); opacity: 0; } to { transform: none; opacity: 1; } }
+.toast-close { position: absolute; right: 10px; top: 6px; border: none; background: none; font-size: 22px; color: var(--muted); cursor: pointer; }
+.toast-who { margin: 6px 0 0; font-weight: 500; }
+.toast-meta { margin: 2px 0 10px; font-size: 13px; color: var(--muted); }
+.toast-error { color: var(--err); font-size: 13px; margin: 0 0 8px; }
+.toast-actions { display: flex; gap: 8px; }
+
+/* ---------- Мои записи (пациент) ---------- */
+.app-list { display: grid; gap: 12px; }
+.app-card { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 16px 20px; }
+.app-card form { margin: 0; }
+.app-when { display: flex; flex-direction: column; min-width: 150px; }
+.app-when strong { font-size: 22px; }
+.app-when span { font-size: 13px; color: var(--muted); }
+.app-who { display: flex; flex-direction: column; flex: 1; min-width: 180px; }
+
+/* ---------- Телефоны: панель переезжает вниз ---------- */
+@media (max-width: 720px) {
+    .rail { top: auto; left: 8px; right: 8px; bottom: 8px; width: auto; height: 74px; flex-direction: row; padding: 6px 10px; border-radius: 22px; }
+    .rail:hover, .rail:focus-within { width: auto; }
+    .rail-brand, .rail-space { display: none; }
+    .rail-item { width: auto; flex: 1; padding: 4px 0; }
+    .rail-label { max-height: 16px; opacity: 1; margin-top: 2px; font-size: 11px; }
+    .rail-form { flex: 1; display: flex; }
+    .app-dim { display: none; }
+    .app-main { padding: 16px 12px 96px; }
+    .toast-area { bottom: 96px; }
+}
+
+/* ---------- Поля в окнах, выпадающие списки, текстовые области ---------- */
+.modal-md { max-width: 560px; }
+.modal-form { margin-top: 4px; }
+.modal-form label, .modal-form > div > label { display: flex; flex-direction: column; gap: 6px; font-size: 14px; color: var(--muted); }
+.modal-card select, .modal-card textarea, .modal-card input[type=search], .modal-card input[type=time] {
+    width: 100%; border: 1px solid var(--line); border-radius: 12px; padding: 10px 14px;
+    font: inherit; color: var(--ink); background: #fff;
+}
+.modal-card select, .modal-card input[type=time], .modal-card input[type=search] { height: 42px; padding: 0 14px; }
+.modal-card textarea { resize: vertical; min-height: 70px; }
+.modal-card select:focus, .modal-card textarea:focus, .modal-card input:focus { outline: 2px solid rgba(27, 77, 255, .35); border-color: var(--blue); }
+.modal-card select:disabled, .modal-card textarea:disabled { background: #F4F6FB; color: var(--muted); }
+.modal-actions-wrap { flex-wrap: wrap; }
+.push-right { margin-left: auto; }
+
+/* ---------- Профиль ---------- */
+.profile-grid { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(280px, 1fr); gap: 20px; align-items: start; }
+.profile-grid .panel h2 { font-size: 20px; }
+.avatar-row { display: flex; gap: 20px; align-items: center; margin-bottom: 22px; flex-wrap: wrap; }
+.avatar-big { display: block; width: 110px; height: 110px; border-radius: 50%; object-fit: cover; }
+.avatar-big.avatar-letters { display: flex; align-items: center; justify-content: center; background: rgba(27, 77, 255, .12); color: var(--blue); font-size: 34px; font-weight: 600; }
+.avatar-controls p { margin: 6px 0 0; }
+.file-btn { position: relative; overflow: hidden; }
+.file-btn input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+.check { display: flex; align-items: center; gap: 8px; font-size: 14px; margin-top: 8px; cursor: pointer; }
+.role-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.role-row .badge { margin: 0; }
+.one-col { grid-template-columns: 1fr; }
+.rail-avatar { display: block; width: 38px; height: 38px; }
+.rail-avatar img { width: 38px; height: 38px; border-radius: 50%; object-fit: cover; display: block; border: 2px solid #fff; box-shadow: 0 2px 8px rgba(27, 77, 255, .25); }
+@media (max-width: 860px) { .profile-grid { grid-template-columns: 1fr; } }
+
+/* ---------- Руководитель: врачи, график, отчёты ---------- */
+.photo-big { display: block; width: 90px; height: 120px; border-radius: 16px; object-fit: cover; }
+.photo-big.avatar-letters { display: flex; align-items: center; justify-content: center; background: rgba(27, 77, 255, .1); color: var(--blue); font-size: 14px; border-radius: 16px; }
+.form-panel select, .form-panel textarea, .sched-layout select, .sched-layout input[type=date], .sched-layout input[type=time], .custom-period input {
+    width: 100%; border: 1px solid var(--line); border-radius: 12px; font: inherit; color: var(--ink); background: #fff;
+}
+.form-panel select, .sched-layout select, .sched-layout input[type=date], .sched-layout input[type=time], .custom-period input { height: 42px; padding: 0 12px; }
+.form-panel textarea { padding: 10px 14px; resize: vertical; }
+.form-panel input[type=number] { width: 100%; }
+.sched-layout { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(280px, 1fr); gap: 20px; align-items: start; }
+.sched-layout h2 { font-size: 20px; }
+.sched-layout label { display: flex; flex-direction: column; gap: 6px; font-size: 14px; color: var(--muted); }
+.month-bar { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 14px; }
+.doctor-pick { margin: 0; flex: 1; min-width: 220px; }
+.month-nav { display: flex; align-items: center; gap: 10px; }
+.table-wrap.flat { border: none; border-radius: 0; }
+.two-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.weekdays { display: flex; gap: 6px; flex-wrap: wrap; }
+.sched-layout .wd { flex-direction: row; gap: 0; }
+.wd input { position: absolute; opacity: 0; pointer-events: none; }
+.wd span { display: inline-block; padding: 8px 12px; border: 1px solid var(--line); border-radius: 12px; color: var(--ink); cursor: pointer; }
+.wd input:checked + span { background: var(--blue); border-color: var(--blue); color: #fff; }
+.wd input:focus-visible + span { outline: 2px solid rgba(27, 77, 255, .5); }
+
+.tabs { display: flex; gap: 6px; border-bottom: 1px solid var(--line); margin-bottom: 14px; flex-wrap: wrap; }
+.tab { padding: 10px 16px; color: var(--muted); border-bottom: 2px solid transparent; margin-bottom: -1px; }
+.tab:hover { text-decoration: none; color: var(--ink); }
+.tab.active { color: var(--blue); border-color: var(--blue); font-weight: 500; }
+.period-bar { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-bottom: 16px; }
+.chip-btn { display: inline-flex; align-items: center; height: 36px; padding: 0 16px; border: 1px solid var(--line); border-radius: 18px; background: #fff; color: var(--ink); font: inherit; font-size: 14px; cursor: pointer; }
+.chip-btn:hover { text-decoration: none; background: rgba(27, 77, 255, .06); }
+.chip-btn.active { background: rgba(27, 77, 255, .12); border-color: var(--blue); color: var(--blue); }
+.custom-period { display: flex; gap: 8px; align-items: center; margin: 0 0 0 auto; }
+.custom-period input { width: 150px; }
+.stat-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-bottom: 16px; }
+.stat { background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 14px 18px; }
+.stat span { display: block; font-size: 13px; color: var(--muted); }
+.stat strong { font-size: 24px; font-weight: 600; }
+.bar { height: 10px; background: #E6EBF7; border-radius: 6px; overflow: hidden; min-width: 120px; }
+.bar i { display: block; height: 100%; background: var(--blue); border-radius: 6px; }
+.bar-col { width: 32%; }
+@media (max-width: 900px) { .sched-layout { grid-template-columns: 1fr; } .custom-period { margin-left: 0; } }
+
+/* ---------- Панель системного администратора ---------- */
+.matrix th, .matrix td { vertical-align: middle; }
+.matrix .mx-col { text-align: center; width: 140px; }
+.matrix code { font-size: 12px; }
+.mx { display: inline-flex; cursor: pointer; position: relative; }
+.mx input { position: absolute; opacity: 0; pointer-events: none; }
+.mx span { width: 24px; height: 24px; border: 2px solid #B7C2DC; border-radius: 8px; background: #fff; transition: background .15s, border-color .15s; position: relative; }
+.mx input:checked + span { background: var(--blue); border-color: var(--blue); }
+.mx input:checked + span::after { content: ""; position: absolute; left: 6px; top: 1px; width: 6px; height: 12px; border: solid #fff; border-width: 0 2px 2px 0; transform: rotate(45deg); }
+.mx input:focus-visible + span { outline: 2px solid rgba(27, 77, 255, .5); outline-offset: 2px; }
+.matrix input[type=checkbox]:disabled { width: 20px; height: 20px; }
+.note-panel { margin-top: 20px; max-width: 820px; }
+.note-panel h2 { font-size: 18px; }
+.note-panel ul { margin: 0; padding-left: 20px; color: var(--muted); }
+.note-panel li { margin-bottom: 6px; }
+.role-active { display: flex; flex-direction: column; justify-content: center; gap: 4px; }
+.nowrap { white-space: nowrap; }
+.search-bar select { height: 42px; border: 1px solid var(--line); border-radius: 12px; padding: 0 12px; font: inherit; background: #fff; color: var(--ink); }
