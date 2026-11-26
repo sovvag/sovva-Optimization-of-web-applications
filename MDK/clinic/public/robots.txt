@@ -1,0 +1,15 @@
+User-agent: *
+Allow: /
+Disallow: /dashboard
+Disallow: /schedule
+Disallow: /patients
+Disallow: /my-appointments
+Disallow: /manager/
+Disallow: /sysadmin/
+Disallow: /profile
+Disallow: /login
+Disallow: /register
+Disallow: /api/
+
+# Замените адрес на адрес вашего сайта
+Sitemap: http://localhost/sitemap.xml

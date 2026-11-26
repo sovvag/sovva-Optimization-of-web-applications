@@ -1,0 +1,13 @@
+# Запрет показа списка файлов в папках
+Options -Indexes
+
+# Все запросы к несуществующим файлам отправляем в index.php
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ index.php [L]
+
+# Скрытые файлы (.env, .git и т.п.) не отдаём
+<FilesMatch "^\.(?!htaccess)">
+    Require all denied
+</FilesMatch>
