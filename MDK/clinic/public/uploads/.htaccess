@@ -1,0 +1,13 @@
+# В папке загрузок запрещаем выполнение PHP
+# (даже если злоумышленник загрузит туда скрипт, он не запустится)
+<IfModule mod_php7.c>
+    php_flag engine off
+</IfModule>
+<IfModule mod_php.c>
+    php_flag engine off
+</IfModule>
+RemoveHandler .php .phtml .php3
+<FilesMatch "\.(php|phtml|php3|php5|phar)$">
+    Require all denied
+</FilesMatch>
+Options -Indexes
